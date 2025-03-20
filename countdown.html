@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .countdown {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Birthday Countdown</h2>
+    <form name="future">
+        <label for="year">Year:</label>
+        <select name="ye" id="year">
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+	    <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+            <option value="2031">2031</option>
+            <option value="2032">2032</option>
+            <option value="2033">2033</option>
+	    <option value="2034">2034</option>
+            <option value="2035">2035</option>
+            <option value="2036">2036</option>
+        </select>
+        <label for="month">Month:</label>
+        <select name="mo" id="month">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+        </select>
+        <label for="day">Day:</label>
+        <select name="da" id="day">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+	    <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">1</option>
+	    <option value="11">1</option>
+            <option value="12">2</option>
+            <option value="13">3</option>
+            <option value="14">4</option>
+            <option value="15">5</option>
+            <option value="16">6</option>
+	    <option value="17">7</option>
+            <option value="18">8</option>
+            <option value="19">9</option>
+            <option value="20">2</option>
+            <option value="21">21</option>
+            <option value="22">22</option>	    
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+	    <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+        </select>
+        <br><br>
+        <button type="button" onclick="setfuturedate()">Start Countdown</button>
+    </form>
+    <div id="countdown" class="countdown"></div>
+
+    <script>
+        let futuredate, nowdate, resultdays, resulthours, resultminutes, resultseconds;
+
+        function setfuturedate() {
+            const year = document.future.ye.value;
+            const month = document.future.mo.value;
+            const day = document.future.da.value;
+
+            futuredate = new Date(year, month, day, 0, 0, 0);
+            docountdown();
+        }
+
+        function docountdown() {
+            calculateresults();
+            formatresults();
+            setTimeout(docountdown, 1000);
+        }
+
+        function calculateresults() {
+            nowdate = new Date();
+            const timeDiff = (futuredate - nowdate) / 1000;
+
+            resultdays = Math.floor(timeDiff / (24 * 60 * 60));
+            resulthours = Math.floor((timeDiff % (24 * 60 * 60)) / 3600);
+            resultminutes = Math.floor((timeDiff % 3600) / 60);
+            resultseconds = Math.floor(timeDiff % 60);
+        }
+
+        function formatresults() {
+            const countdownDiv = document.getElementById("countdown");
+            countdownDiv.textContent = `You have to wait ${resultdays} days, ${resulthours} hours, ${resultminutes} minutes, and ${resultseconds} seconds for your next birthday.`;
+        }
+    </script>
+</body>
+</html>
